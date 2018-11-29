@@ -9,3 +9,9 @@ g = Github(user, password)
 
 for repo in g.get_user().get_repos():
     print(repo.name)
+    contributors = repo.get_contributors()
+    count = 0
+    for contributor in contributors:
+        count = count + 1
+    print(count)
+        #print(contributor.login)
