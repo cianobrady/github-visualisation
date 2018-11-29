@@ -1,27 +1,63 @@
 [
 {
-  "user": "jefferson",
-	"repo_name": "biography",
-	"commits": 20
-},
-{
-  "user": "jeff",
-	"repo_name" : "github_visualisation",
-	"commits": 12
-},
-{
-  "user": "dimitrii",
-	"repo_name" : "lca-assignment",
-	"commits": 47
-},
-{
   "user": "obradyci",
-	"repo_name" : "lca-assignment",
-	"commits": 47
+	"data": [
+    {
+      "value": 20
+    },
+    {
+      "value": 20
+    }
+  ]
 },
 {
-  "user": "pal",
-	"repo_name" : "lca-assignment",
-	"commits" : 2
+  "user": "askywalker",
+  "data": [
+    {
+      "value": 40
+    },
+    {
+      "value": 46
+    }
+  ]
+},
+{
+  "user": "owkenobi",
+  "percentages": [
+    {
+      "value": 10,
+      "type": "commits"
+    },
+    {
+      "value": 14,
+      "type": "loc"
+    }
+  ]
+},
+{
+  "user": "dvader",
+  "percentages": [
+    {
+      "value": 15,
+      "type": "commits"
+    },
+    {
+      "value": 8,
+      "type": "loc"
+    }
+  ]
+},
+{
+  "user": "yoda",
+  "percentages": [
+    {
+      "value": 10,
+      "type": "commits"
+    },
+    {
+      "value": 12,
+      "type": "loc"
+    }
+  ]
 }
 ]
