@@ -1,16 +1,16 @@
 [
 {
-  "user": "obradyci",
+  "user": "jefferson",
 	"repo_name": "biography",
 	"commits": 20
 },
 {
-  "user": "obradyci",
+  "user": "jeff",
 	"repo_name" : "github_visualisation",
 	"commits": 12
 },
 {
-  "user": "obradyci",
+  "user": "dimitrii",
 	"repo_name" : "lca-assignment",
 	"commits": 47
 },
@@ -20,7 +20,7 @@
 	"commits": 47
 },
 {
-  "user": "obradyci",
+  "user": "pal",
 	"repo_name" : "lca-assignment",
 	"commits" : 2
 }
