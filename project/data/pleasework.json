@@ -1,7 +1,7 @@
 [
 {
   "user": "obradyci",
-	"data": [
+	"percentages": [
     {
       "value": 20
     },
@@ -12,7 +12,7 @@
 },
 {
   "user": "askywalker",
-  "data": [
+  "percentages": [
     {
       "value": 40
     },
