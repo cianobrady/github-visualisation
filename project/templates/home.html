@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
 
+    <style>
+    svg {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    h1 {
+      text-align: center;
+      font-family: "Trebuchet MS";
+    }
+    h5 {
+      text-align: center;
+      font-family: "Trebuchet MS";
+    }
+    .square.red{
+      height: 20px;
+      width: 20px;
+      background-color: #FF4040;
+      display: inline-block;
+    }
+    .square.blue{
+      height: 20px;
+      width: 20px;
+      background-color: #7C97FF;
+      display: inline-block;
+    }
+    fieldset {
+      align-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      width: 150px;
+      text-align: left;
+      font-family: "Trebuchet MS";
+    }
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+  <body>
+    <h1>Visualisation</h1>
+    <h5>This visualisation displays the relationship between the percentage of commits added and the percentage of net lines of code added by a contributor in a repository.</h5>
+    <script type="text/javascript">
+    var margin = {top: 20, right: 20, bottom:30, left: 40},
+    width = 960 - margin.right - margin.left,
+    height = 350 - margin.top - margin.bottom;
+
+    //define svg
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width", width+margin.right+margin.left)
+      .attr("height", height+margin.top+margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var xScale = d3.scaleBand()
+      .rangeRound([0, width])
+      .padding(0.1);
+
+    var xScale2 = d3.scaleBand();
+
+    var yScale = d3.scaleLinear()
+          .range([height, 0]);
+
+    var color = d3.scaleOrdinal()
+        .range(["#FF4040","#7C97FF"]);
+    var mouseColor = d3.scaleOrdinal()
+        .range(["#e53939","#6379CE"]);
+    var url = "https://raw.githubusercontent.com/cianobrady/github-visualisation/master/data.json";
+    //import data
+    d3.json(url, function(error, data) {
+        if(error) throw error;
+
+      //parse data
+      data.forEach(function(d) {
+        d.user = d.user
+        d.type = d.type
+        d.percentages = d.percentages
+        d.value = +d.value;
+      });
+
+      var usernames = data.map(function(d) { return d.user; });
+      var types = data[0].percentages.map(function(d) { return d.type; });
+
+      //x and y axis domains
+      xScale.domain(usernames);
+      xScale2.domain(types).rangeRound([0, xScale.bandwidth()]);
+      yScale.domain([0, d3.max(data, function(user){return d3.max(user.percentages, function (d){return d.value})})]);
+
+      var slice = svg.selectAll(".slice")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "g")
+        .attr("transform",function(d) { return "translate(" + xScale(d.user) + ",0)"; });
+
+      //create bars
+      slice.selectAll("rect")
+        .data(function(d) { return d.percentages; })
+        .enter().append("rect")
+        .attr("width", xScale2.bandwidth())
+        .attr("x", function(d){return xScale2(d.type);})
+        .attr("fill", function(d){return color(d.type);})
+        .attr("y", function(d) { return yScale(0); })
+        .attr("height", function(d) { return height - yScale(0); })
+        .on("mouseover", function(d) {
+          d3.select(this)
+          .style("fill", mouseColor(d.type))
+        })
+        .on("mouseout", function(d) { d3.select(this).style("fill", color(d.type));});
+      // transition
+      slice.selectAll("rect")
+        .transition()
+        .delay(function (d) {return 500;})
+        .duration(1000)
+        .attr("y", function(d) { return yScale(d.value); })
+        .attr("height", function(d) { return height - yScale(d.value); });
+
+      // add the x asis
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xScale));
+
+      // add the y Axis
+      svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+          });
+
+  </script>
+   <fieldset>
+     <span class="square red"></span> Commits<br>
+     <span class="square blue"></span> Lines of Code
+   </fieldset>
+
+  </body>
+</html>
