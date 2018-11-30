@@ -3,10 +3,12 @@
   "user": "obradyci",
 	"percentages": [
     {
-      "value": 20
+      "value": 20,
+      "type": "commits"
     },
     {
-      "value": 20
+      "value": 20,
+      "type": "loc"
     }
   ]
 },
@@ -14,10 +16,12 @@
   "user": "askywalker",
   "percentages": [
     {
-      "value": 40
+      "value": 40,
+      "type": "commits"
     },
     {
-      "value": 46
+      "value": 46,
+      "type": "loc"
     }
   ]
 },
